@@ -1,11 +1,13 @@
-/*
- * 	INA219.c
+/**
+ * @file INA219.c
  *
- *  Based on the github repository : https://github.com/komuch/PSM_INA219_STM32
+ * Based on the github repository : https://github.com/komuch/PSM_INA219_STM32
  */
 
-#include "main.h"
 #include "INA219.h"
+
+/* === Include here the HAL header corresponding to your board === */
+// #include "stm32f4xx_hal.h"
 
 #include <math.h>
 
