@@ -19,6 +19,7 @@ using HAL functions and the I2C_HandleTypeDef.
 
 First you must create an `INA219_t` struct and initialise it with `INA219_Init()`.
 This basic struct will then contain basic information to communication with the INA219 and correctly read its values.
+**Warning !** The maximum current given to `INA219_Init()` must be greater than 205 mA !
 
 ### Configure the INA219
 

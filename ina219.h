@@ -92,7 +92,7 @@ typedef struct
 *
 * @param i2c: the I2C_HandleTypeDef.
 * @param Adress: the I2C adress of the INA219.
-* @param maxCurrent: the maximum expected current in A.
+* @param maxCurrent: the maximum expected current in A, must be greater than 205 mA !
 *
 * @retval 1 if the I2C interface is ready and the INA219 has been reset, 0 otherwise.
 */
