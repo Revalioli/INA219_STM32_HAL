@@ -8,13 +8,17 @@
 #define INC_INA219_H_
 
 /* === Include here the HAL header corresponding to your board === */
-// #include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 
 #define SHUNT_RESISTOR 100		///< 0.1 Ohm shunt resistor already on the Adafruit arduino breakout
 
 
-#define INA219_DEFAULT_ADDRESS (0x40)	///< I2C adress if A0 and A1 on GND (default address on the Adafruit arduino breakout)
+#define INA219_DEFAULT_ADDRESS (0x40U)	///< I2C adress if A0 and A1 on GND (default address on the Adafruit arduino breakout)
 
 /* === Registers === */
 #define	INA219_REG_CONFIG				(0x00U)	///< Configuration register address
@@ -68,6 +72,9 @@
 #define	INA219_CONFIG_MODE_SVOLT_CONTINUOUS			(0x5U) 	///< Shunt voltage continuous
 #define	INA219_CONFIG_MODE_BVOLT_CONTINUOUS			(0x6U) 	///< Bus voltage continuous
 #define	INA219_CONFIG_MODE_SANDBVOLT_CONTINUOUS 	(0x7U)	///< Shunt and bus voltage continuous
+
+
+extern HAL_StatusTypeDef INA219_I2C_Status;	///< Stores the returned status of the last I2C communication
 
 
 /**
@@ -207,6 +214,8 @@ void INA219_setPowerMode(INA219_t *ina219, uint8_t Mode);
 uint16_t Read16(INA219_t *ina219, uint8_t Register);
 void Write16(INA219_t *ina219, uint8_t Register, uint16_t Value);
 
-
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* INC_INA219_H_ */
