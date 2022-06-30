@@ -1,5 +1,5 @@
 /**
- * @file INA219.h
+ * \file INA219.h
  *
  * Based on the github repository : https://github.com/komuch/PSM_INA219_STM32
  */
@@ -78,23 +78,23 @@ extern HAL_StatusTypeDef INA219_I2C_Status;	///< Stores the returned status of t
 
 
 /**
-* @brief Holds data on a INA219, must not be initialised or modified directly. Use INA219_Init() and the others dedicated functions
+* \brief Hold data on a INA219, must not be initialised or modified directly. Use INA219_Init() and the others dedicated functions
 */
 typedef struct
 {
-	I2C_HandleTypeDef 	*ina219_i2c;	// HAl I2C handler associated with the I2C pins used to communicate
-	uint8_t	Address;									// Slave address of the INA219
-	double current_LSB;								// For current register, depends of the epected maximum current value in A
+	I2C_HandleTypeDef 	*ina219_i2c;	///< HAl I2C handler of the I2C peripheral connected to the INA219
+	volatile uint8_t	Address;		///< Address of the INA219
+	volatile double current_LSB;		///< Value of the LSB of the INA219 current register
 } INA219_t;
 
 /**
-* @brief Initialises an ina219_t struct and reset the INA219.
+* \brief Initialise an INA219_t struct and reset the INA219.
 *
-* @param i2c: the I2C_HandleTypeDef.
-* @param Adress: the I2C adress of the INA219.
-* @param maxCurrent: the maximum expected current in A, must be greater than 205 mA !
+* \param i2c: the I2C_HandleTypeDef of the I2C peripheral used.
+* \param Adress: the I2C adress of the INA219.
+* \param maxCurrent: the maximum expected current in A, has to be greater than 205 mA !
 *
-* @retval 1 if the I2C interface is ready and the INA219 has been reset, 0 otherwise.
+* \return 1 if the I2C interface is ready and the INA219 has been reset, 0 otherwise.
 */
 uint8_t INA219_Init(INA219_t *ina219, I2C_HandleTypeDef *i2c, uint8_t Address, double maxCurrent);
 
@@ -102,66 +102,66 @@ uint8_t INA219_Init(INA219_t *ina219, I2C_HandleTypeDef *i2c, uint8_t Address, d
 /* === Read functions === */
 
 /**
-* @brief Reads the raw value stored in the shunt boltage register.
+* \brief Read the raw value stored in the shunt boltage register.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @retval the register value.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \return the register value.
 */
 uint16_t INA219_ReadRawShuntVolage(INA219_t *ina219);
 
 /**
-* @brief Reads the shunt voltage.
+* \brief Read the shunt voltage.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @retval the shunt voltage in mV.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \return the shunt voltage in mV.
 */
 float INA219_ReadShuntVoltage(INA219_t *ina219);
 
 /**
-* @brief Reads the raw value stored in the bus voltage register.
+* \brief Read the raw value stored in the bus voltage register.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @retval the register value.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \return the register value.
 */
 uint16_t INA219_ReadRawBusVoltage(INA219_t * ina219);
 
 /**
-* @brief Reads the bus voltage.
+* \brief Read the bus voltage.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @retval the bus voltage in mV.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \return the bus voltage in mV.
 */
 uint16_t INA219_ReadBusVoltage(INA219_t *ina219);
 
 /**
-* @brief Reads the raw value of the current register.
+* \brief Read the raw value of the current register.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @retval the register value.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \return the register value.
 */
 uint16_t INA219_ReadRawCurrent(INA219_t *ina219);
 
 /**
-* @brief Reads the current.
+* \brief Read the current.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @retval the current in A.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \return the current in A.
 */
 double INA219_ReadCurrent(INA219_t *ina219);
 
 /**
-* @brief Reads the raw value of the power register.
+* \brief Read the raw value of the power register.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @retval the register value.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \return the register value.
 */
 uint16_t INA219_ReadRawPower(INA219_t * ina219);
 
 /**
-*	@brief Reads the power.
+* \brief Read the power.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @retval the power in W.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \return the power in W.
 */
 double INA219_ReadPower(INA219_t * ina219);
 
@@ -170,41 +170,41 @@ double INA219_ReadPower(INA219_t * ina219);
 /* === Configuration functions === */
 
 /**
-* @brief Resets the INA129 with the initial register configuration.
+* \brief Reset the INA129.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
+* \param ina219: pointer to the INA219_t struct to be used.
 */
 void INA219_Reset(INA219_t *ina219);
 
 /**
-* @brief Gets the current configuration.
+* \brief Get the current configuration.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @retval the configuration register value.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \return the configuration register value.
 */
 uint16_t INA219_getConfig(INA219_t *ina219);
 
 /**
-* @brief Sets the configuration register.
+* \brief Set the configuration register.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @param Config: the new uint16_t value of the configuration register.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \param Config: the new uint16_t value of the configuration register.
 */
 void INA219_setConfig(INA219_t *ina219, uint16_t Config);
 
 /**
-* @brief Sets the calibration register.
+* \brief Set the calibration register.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @param Config: the new uint16_t value of the calibration register.
+* \param ina219: pointer to the INA219_t struct to be used.
+* \param Config: the new uint16_t value of the calibration register.
 */
 void INA219_setCalibration(INA219_t *ina219, uint16_t CalibrationData);
 
 /**
-* @brief Sets the conversion and power mode.
+* \brief Set the conversion and power mode.
 *
-* @param ina219: pointer to the INA219_t struct to be used.
-* @param Mode: the mode (only bits 0 to 2 have meaning).
+* \param ina219: pointer to the INA219_t struct to be used.
+* \param Mode: the mode (only bits 0 to 2 have meaning).
 */
 void INA219_setPowerMode(INA219_t *ina219, uint8_t Mode);
 
